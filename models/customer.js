@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+var passportLocalMongoose = require('passport-local-mongoose'); // may not be necessary
 
 const customerSchema = mongoose.Schema({
   // Not sure if the types are what we want

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Customer = require("../models/customer");
+const notifier = require("../lib/notifier");
 
 // returns all the customers
 router.get("/", async (req, res) => {
@@ -22,6 +23,7 @@ router.post("/", async (req, res) => {
 
   try {
     const savedCustomer = await customer.save();
+    notifier.sendNotification();
     res.json(savedCustomer);
   } catch (err) {
     res.json({ message: err });
