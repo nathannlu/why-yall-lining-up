@@ -1,10 +1,12 @@
 const express = require("express");
+const cron = require("node-cron");
+const fs = require("fs");
 const app = express();
 const port = 8080;
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const cors = require('cors');
-const notifyUsers = require('./src/scripts/notify.js');
+const cors = require("cors");
+const notifyUsers = require("./src/scripts/notify.js");
 
 const postsRoute = require("./src/routes/posts");
 
@@ -24,7 +26,10 @@ mongoose.connect(process.env.DB_CONNECTION, {
 
 // Script testing
 notifyUsers();
-
+cron.schedule("* * * * *", () => {
+  console.log("running every minute");
+  notifyUsers();
+});
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
 );
