@@ -4,13 +4,16 @@ const port = 8080;
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require('cors');
+const notifyUsers = require('./src/scripts/notify.js');
+
+const postsRoute = require("./src/routes/posts");
+
 require("dotenv/config");
 
 app.use(cors());
 app.use(bodyParser.json());
-// Import routes
-const postsRoute = require("./src/routes/posts");
 
+// Import routes
 app.use("/", postsRoute);
 
 // Connect to DB, created .env to hide user and password to the DB
@@ -19,7 +22,8 @@ mongoose.connect(process.env.DB_CONNECTION, {
   useUnifiedTopology: true,
 });
 
-app.get("/", (req, res) => res.send("Hello World!"));
+// Script testing
+notifyUsers();
 
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`)
