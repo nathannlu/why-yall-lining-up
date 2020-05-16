@@ -16,8 +16,8 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const customer = new Customer({
     phone: req.body.phone,
-    group: req.body.group,
-    customer_num: req.body.customer_num,
+    group_num: req.body.group_num,
+    customer_wait_num: req.body.customer_wait_num,
   });
 
   try {
@@ -43,7 +43,7 @@ router.get('/:customerId', async (req, res) => {
 router.patch('/:customerId', async (req, res) => {
   try { // set part is the updated part, so updating customer number
     const updatedCustomer = await Customer.updateOne({_id: req.params.objectId},
-        {$set: {customer_num: req.params.customer_num}}
+        {$set: {customer_wait_num: req.params.customer_wait_num}}
         );
     res.json(updatedCustomer);
 
@@ -55,7 +55,7 @@ router.patch('/:customerId', async (req, res) => {
 // delete specific customer
 router.delete('/:customerId', async (req, res) => {
   try {
-    const removedCustomer = await Customer.remove({customer_num: req.params.customer_num});
+    const removedCustomer = await Customer.remove({_id: req.params.objectId});
     res.json(removedCustomer);
   }catch (err) {
     res.json({ message: err });
