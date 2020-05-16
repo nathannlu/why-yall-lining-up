@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv/config");
 
-//Middlewares
+//Middleware
 app.use(cors());
 app.use(bodyParser.json());
 

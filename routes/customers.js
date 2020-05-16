@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 });
 
 // return specific customer, can be used to update or delete a customer
-router.get('/:customerId', async (req, res) => {
+router.get('/:objectId', async (req, res) => {
   try {
     const customer = await Customer.findById(req.params.objectId);
     res.json(customer);
@@ -40,10 +40,10 @@ router.get('/:customerId', async (req, res) => {
 });
 
 // update specific customer
-router.patch('/:customerId', async (req, res) => {
+router.patch('/:objectId', async (req, res) => {
   try { // set part is the updated part, so updating customer number
     const updatedCustomer = await Customer.updateOne({_id: req.params.objectId},
-        {$set: {customer_wait_num: req.params.customer_wait_num}}
+        {$set: {customer_wait_num: req.body.customer_wait_num}}
         );
     res.json(updatedCustomer);
 
@@ -53,7 +53,7 @@ router.patch('/:customerId', async (req, res) => {
 });
 
 // delete specific customer
-router.delete('/:customerId', async (req, res) => {
+router.delete('/:objectId', async (req, res) => {
   try {
     const removedCustomer = await Customer.remove({_id: req.params.objectId});
     res.json(removedCustomer);
