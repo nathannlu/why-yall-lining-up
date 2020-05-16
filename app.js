@@ -3,8 +3,10 @@ const app = express();
 const port = 8080;
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const cors = require('cors');
 require("dotenv/config");
 
+app.use(cors());
 app.use(bodyParser.json());
 // Import routes
 const postsRoute = require("./src/routes/posts");
