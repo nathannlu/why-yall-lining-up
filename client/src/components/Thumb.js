@@ -6,7 +6,7 @@ const Thumb = () => {
 	const [registerProcess, setRegisterProcess] = useState(0)
 
 	const removeFromWaitlist = userId => {
-		axios.delete(`https://why-yall-lining-up.herokuapp.com/api/${userId}`).then(res => {
+		axios.delete(`https://app-align.herokuapp.com/api/${userId}`).then(res => {
 			console.log(res)
 			setRegisterProcess(3)
 		})
@@ -19,7 +19,7 @@ const Thumb = () => {
 			customer_num: 1
 		}
 	
-		axios.post('https://why-yall-lining-up.herokuapp.com/api/', data).then(res => {
+		axios.post('https://app-align.herokuapp.com/api/', data).then(res => {
 			if (res.status === 200) {
 				setNewUser({...newUser, ['id']: res.data._id})
 				setRegisterProcess(2)
@@ -62,7 +62,7 @@ const Thumb = () => {
 				1: (
 					<div>
 						<h4>
-							Reserving for Costco		
+							Reserving for Costco in Burnaby, British Columbia		
 						</h4>
 						<form onSubmit={onSubmit}>
 							<div className="flex flex-wrap">
@@ -83,7 +83,7 @@ const Thumb = () => {
 						<p>
 							Estimated wait time: 5 minutes
 						</p>
-
+						<img src="/checkmark.png" className="mx-auto my-6" />
 						<button onClick={() => removeFromWaitlist(newUser.id)} className="text-blue-500 underline">
 							Leave queue
 						</button>
@@ -92,7 +92,7 @@ const Thumb = () => {
 				3: (
 					<div className="text-center">
 						<p>
-							you have left the queue
+							Thanks for visiting! You have left the queue
 						</p>
 						<button onClick={() => setRegisterProcess(0)} className="text-blue-500 underline">
 							Return to main menu		
