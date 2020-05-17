@@ -11,9 +11,6 @@
     "install-client": "cd client && yarn install",
     "heroku-postbuild": "yarn run install-client && yarn run build"
   },
-  "engines": {
-    "node": "10.x",
-  },
   "author": "nathan",
   "license": "ISC",
   "dependencies": {
@@ -25,5 +22,8 @@
     "mongoose": "^5.9.14",
     "nodemon": "^2.0.4",
     "twilio": "^3.43.1"
+  },
+  "engines": {
+    "node": "10.19.0"
   }
 }
