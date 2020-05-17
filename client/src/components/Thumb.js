@@ -65,8 +65,10 @@ const Thumb = () => {
 							Reserving for Costco		
 						</h4>
 						<form onSubmit={onSubmit}>
-							<input type="number" name="phone" className="w-full bg-gray-200 my-8 p-4" onChange={onChange} placeholder="Phone number" />
-
+							<div className="flex flex-wrap">
+								<input type="number" name="phone" className="bg-gray-200 my-8 mr-2 p-4 flex-1" onChange={onChange} placeholder="Phone number" />
+								<input type="number" name="group" className="bg-gray-200 my-8 p-4 ml-auto" style={{width: '50px'}} onChange={onChange} placeholder="Size" />
+							</div>
 							<button onClick={() => addToWaitlist} className="btn btn-black w-full py-6">
 								Line up
 							</button>
