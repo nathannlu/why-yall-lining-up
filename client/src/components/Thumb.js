@@ -6,7 +6,7 @@ const Thumb = () => {
 	const [registerProcess, setRegisterProcess] = useState(0)
 
 	const removeFromWaitlist = userId => {
-		axios.delete(`http://localhost:8080/api/${userId}`).then(res => {
+		axios.delete(`https://why-yall-lining-up.herokuapp.com/api/${userId}`).then(res => {
 			console.log(res)
 			setRegisterProcess(3)
 		})
@@ -19,7 +19,7 @@ const Thumb = () => {
 			customer_num: 1
 		}
 	
-		axios.post('http://localhost:8080/api/', data).then(res => {
+		axios.post('https://why-yall-lining-up.herokuapp.com/api/', data).then(res => {
 			if (res.status === 200) {
 				setNewUser({...newUser, ['id']: res.data._id})
 				setRegisterProcess(2)
@@ -62,7 +62,7 @@ const Thumb = () => {
 				1: (
 					<div>
 						<h4>
-							Line the fuck up
+							Reserving for Costco		
 						</h4>
 						<form onSubmit={onSubmit}>
 							<input type="number" name="phone" className="w-full bg-gray-200 my-8 p-4" onChange={onChange} placeholder="Phone number" />
