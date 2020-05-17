@@ -6,7 +6,7 @@ const Thumb = () => {
 	const [registerProcess, setRegisterProcess] = useState(0)
 
 	const removeFromWaitlist = userId => {
-		axios.delete(`http://localhost:8080/${userId}`).then(res => {
+		axios.delete(`http://localhost:8080/api/${userId}`).then(res => {
 			console.log(res)
 			setRegisterProcess(3)
 		})
@@ -19,7 +19,7 @@ const Thumb = () => {
 			customer_num: 1
 		}
 	
-		axios.post('http://localhost:8080/', data).then(res => {
+		axios.post('http://localhost:8080/api/', data).then(res => {
 			if (res.status === 200) {
 				setNewUser({...newUser, ['id']: res.data._id})
 				setRegisterProcess(2)
@@ -29,7 +29,7 @@ const Thumb = () => {
 	}
 
 	const fetchWaitlist = () => {
-		axios.get('http://localhost:8080/').then(res => {
+		axios.get('http://localhost:8080/api/').then(res => {
 			console.log(res)	
 		})
 	}

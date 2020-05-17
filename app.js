@@ -14,7 +14,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Import routes
-app.use("/", postsRoute);
+app.use("/api", postsRoute);
 
 // Connect to DB, created .env to hide user and password to the DB
 mongoose.connect(process.env.DB_CONNECTION, {
