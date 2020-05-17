@@ -27,6 +27,9 @@ function App(props) {
             lat: 49.260368,
             lng: -123.003769,
           }}
+					options={{
+						disableDefaultUI: true
+					}}
         >
           <Marker onLoad={onLoad} position={position} />
         </GoogleMap>
