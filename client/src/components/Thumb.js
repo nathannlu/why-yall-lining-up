@@ -3,10 +3,13 @@ import axios from 'axios';
 
 const Thumb = () => {
 	const [newUser, setNewUser] = useState({})
-	const [registerProcess, setRegisterProcess] = useState(1)
+	const [registerProcess, setRegisterProcess] = useState(0)
 
 	const removeFromWaitlist = userId => {
-		axios.delete('http://localhost:8080/')
+		axios.delete(`http://localhost:8080/${userId}`).then(res => {
+			console.log(res)
+			setRegisterProcess(3)
+		})
 	}
 
 	const addToWaitlist = newUser => {
@@ -16,14 +19,18 @@ const Thumb = () => {
 			customer_num: 1
 		}
 	
-		axios.post('http://localhost:8080/', data).then(res => console.log(res))
+		axios.post('http://localhost:8080/', data).then(res => {
+			if (res.status === 200) {
+				setNewUser({...newUser, ['id']: res.data._id})
+				setRegisterProcess(2)
+				console.log('success')
+			}
+		})
 	}
 
 	const fetchWaitlist = () => {
 		axios.get('http://localhost:8080/').then(res => {
-			if (res.status === 200) {
-				console.log('Success')	
-			}
+			console.log(res)	
 		})
 	}
 
@@ -43,12 +50,22 @@ const Thumb = () => {
 		<div className="p-8" style={{backgroundColor: 'white'}}>
 			{{
 				0: (
+					<div className="w-full">
+						<input type="text" name="phone" className="w-full bg-gray-200 my-8 p-4" placeholder="Where are you looking to shop today?" />
+						<div className="w-full text-right">
+						<button className="text-blue-500 ml-auto" onClick={() => setRegisterProcess(1)}>
+							Go &rarr;
+						</button>
+						</div>
+					</div>
+				),
+				1: (
 					<div>
 						<h4>
 							Line the fuck up
 						</h4>
 						<form onSubmit={onSubmit}>
-							<input type="number" name="phone" className="bg-gray-200 my-8 p-4" onChange={onChange} placeholder="Phone number" />
+							<input type="number" name="phone" className="w-full bg-gray-200 my-8 p-4" onChange={onChange} placeholder="Phone number" />
 
 							<button onClick={() => addToWaitlist} className="btn btn-black w-full py-6">
 								Line up
@@ -56,7 +73,7 @@ const Thumb = () => {
 						</form>
 					</div>
 				),
-				1: (
+				2: (
 					<div className="text-center">
 						<h4 className="pb-2">
 							You are 5th in line
@@ -65,13 +82,24 @@ const Thumb = () => {
 							Estimated wait time: 5 minutes
 						</p>
 
-						<button className="text-blue-500 underline">
+						<button onClick={() => removeFromWaitlist(newUser.id)} className="text-blue-500 underline">
 							Leave queue
 						</button>
 					</div>
+				),
+				3: (
+					<div className="text-center">
+						<p>
+							you have left the queue
+						</p>
+						<button onClick={() => setRegisterProcess(0)} className="text-blue-500 underline">
+							Return to main menu		
+						</button>
+
+					</div>
 				)
 			}[registerProcess]}
-					</div>
+		</div>
 	)
 };
 
