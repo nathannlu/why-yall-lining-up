@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require('cors');
 const notifyUsers = require('./src/scripts/notify.js');
-
+const path = require('path');
 const postsRoute = require("./src/routes/posts");
 
 require("dotenv/config");
@@ -23,7 +23,7 @@ mongoose.connect(process.env.DB_CONNECTION, {
 });
 
 // Script testing
-notifyUsers();
+// notifyUsers();
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static('client/build'));
