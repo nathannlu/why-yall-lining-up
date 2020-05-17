@@ -3,6 +3,7 @@ import Home from "./screens/Home.js";
 import { LoadScript } from "@react-google-maps/api";
 import { GoogleMap } from "@react-google-maps/api";
 import { Marker } from "@react-google-maps/api";
+import Thumb from './components/Thumb.js';
 
 function App(props) {
   const onLoad = (marker) => {
@@ -14,7 +15,10 @@ function App(props) {
   };
   const { containerStyle, center } = props;
   return (
-    <div>
+    <div style={{position: 'relative'}}>
+			<div style={{position: 'absolute', bottom: 0, zIndex: 10, width: '100%'}}>
+				<Thumb />
+			</div>
       <LoadScript googleMapsApiKey="AIzaSyCiFAWaUhuyFLDoprTBhbChbtWPPISVZBQ">
         <GoogleMap
           id="circle-example"
